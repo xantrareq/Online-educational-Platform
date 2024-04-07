@@ -8,11 +8,11 @@ class WelcomePage extends Controller
     public function main()
     {
         //return 'Добро пожаловать)<br/>Ссылки:<br/>http://127.0.0.1:8000/1<br/>http://127.0.0.1:8000/2';
-//        $course = Course::find(1);
+//        $course = CourseController::find(1);
 //        dump($course->title);
 //        return 1;
 
-//        $courses = Course::all(); //Вывод всех названий бд
+//        $courses = CourseController::all(); //Вывод всех названий бд
 //        foreach ($courses as $course) {
 //            dump($course->title);
 //        }
@@ -53,7 +53,7 @@ class WelcomePage extends Controller
     public function delete(): void
     {
 
-//        $course = Course::withTrashed()->find(2); //Поиск в мусорке
+//        $course = CourseController::withTrashed()->find(2); //Поиск в мусорке
 //        $course->restore(); //Восстановление
         $course = Course::find(2);
         $course->delete();

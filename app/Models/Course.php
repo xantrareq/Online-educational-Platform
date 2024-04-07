@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model
 {
-    protected $table = 'courses'; //на всякий прописываем, что работаем именно с моделью Course
+    protected $table = 'courses'; //на всякий прописываем, что работаем именно с моделью CourseController
     use HasFactory;
     use SoftDeletes;//Мягкое удаление
     //Разрешает менять данные в таблице

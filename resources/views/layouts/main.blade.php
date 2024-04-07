@@ -8,7 +8,6 @@
     <link rel="shortcut icon" href="myassets/frame.svg" type="image/svg">
     <link rel="stylesheet" href ="{{asset('build\assets\app-D-sv12UV.css')}}">
     <title>
-
         Libra
     </title>
 </head>
@@ -18,13 +17,13 @@
         <nav class="navbar bg-body navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{route('welcome_page')}}">
-                    <img src="myassets/Frame2.svg" width="40" height="40"  alt="логотип">
+                    <img src="http://localhost:8000/myassets/Frame2.svg" width="40" height="40"  alt="логотип">
                     Либра
                 </a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{route('course_list.main')}}">Список курсов</a>
+                            <a class="nav-link active" aria-current="page" href="{{route('course.main')}}">Список курсов</a>
                         </li>
 
                         <li class="nav-item">
@@ -42,7 +41,7 @@
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" href="{{route('my_profile.main')}}">
-                                <img src="myassets/man.svg" width="35" height="35"  alt="логотип">
+                                <img src="http://localhost:8000/myassets/man.svg" width="35" height="35"  alt="логотип">
                                 Профиль
                             </a>
                         </li>
