@@ -9,7 +9,7 @@ class CourseController extends Controller
     {
         //$courses = CourseController::all();
         $courses = Course::all();
-        return view('course.courses_list',compact('courses'));
+        return view('course.courses',compact('courses'));
     }
 
     public function create()
@@ -17,21 +17,54 @@ class CourseController extends Controller
         return view('course.create');
     }
 
-    public function store()
+    public function edit(Course $course)
+    {
+
+        return view('course.edit',compact('course'));
+    }
+    public function update(Course $course)
     {
         $data = request()->validate([
             'title'=>'string',
             'descryption'=>'string',
             'teacher_id'=>'int',
         ]);
+        //$data['descryption'] = nl2br($data['descryption']);
+
+        $course->update($data);
+        return redirect()->route('course.show',$course->id);
+    }
+    public function destroy(Course $course)
+    {
+        $course->delete();
+        return redirect()->route('course.main');
+
+    }
+
+    public function store()
+    {
+
+        $data = request()->validate([
+            'title'=>'string',
+            'descryption'=>'string',
+            'teacher_id'=>'int',
+        ]);
+        //$data['descryption'] = $data['descryption'].replace("\n", "&lt");
         Course::create($data);
-        return redirect()->route('course_list.main');
+        return redirect()->route('course.main');
     }
 
     public function show(Course $course)
     {
 
         return view('course.show',compact('course'));
+    }
+
+
+    public function register()
+    {
+        return view('register');
+
     }
 
 }

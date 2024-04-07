@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('content')
 <div>
+
     <h3>Курсы</h3>
     <form class="gx-3 gy-2" action="{{route('course.store')}}" method="post">
         @csrf

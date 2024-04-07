@@ -1,11 +1,12 @@
 <!doctype html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="myassets/frame.svg" type="image/svg">
+    <link rel="shortcut icon" href="http://localhost:8000/myassets/Frame.svg" type="image/svg">
     <link rel="stylesheet" href ="{{asset('build\assets\app-D-sv12UV.css')}}">
     <title>
         Libra
@@ -38,9 +39,25 @@
                         <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
                         <button class="btn btn-outline-success" type="submit">Поиск</button>
                     </form>
+
+{{--                    <li class="nav-item dropdown">--}}
+{{--                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">--}}
+{{--                            <img src="http://localhost:8000/myassets/man.svg" width="35" height="35"  alt="логотип">--}}
+{{--                            Профиль--}}
+{{--                        </a>--}}
+{{--                        <ul class="dropdown-menu">--}}
+{{--                            <li><a class="dropdown-item" href="#">Action</a></li>--}}
+{{--                            <li><a class="dropdown-item" href="#">Another action</a></li>--}}
+{{--                            <li><hr class="dropdown-divider"></li>--}}
+{{--                            <li><a class="dropdown-item" href="#">Something else here</a></li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
+                    <!-- Группы больших кнопок (по умолчанию и разделенные) -->
+                    <!-- Кнопка выпадающего списка вправо по умолчанию -->
+
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{route('my_profile.main')}}">
+                            <a class="nav-link active" href="{{route('my_profile.main')}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="http://localhost:8000/myassets/man.svg" width="35" height="35"  alt="логотип">
                                 Профиль
                             </a>
