@@ -1,7 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Course;
+use App\Models\CoursePage;
+use App\Models\Page;
+use Illuminate\Support\Facades\Storage;
+
 class CourseController extends Controller
 {
 
@@ -9,7 +14,7 @@ class CourseController extends Controller
     {
         //$courses = CourseController::all();
         $courses = Course::all();
-        return view('course.courses',compact('courses'));
+        return view('course.courses', compact('courses'));
     }
 
     public function create()
@@ -20,23 +25,41 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
 
-        return view('course.edit',compact('course'));
+        return view('course.edit', compact('course'));
     }
+
     public function update(Course $course)
     {
         $data = request()->validate([
-            'title'=>'string',
-            'descryption'=>'string',
-            'teacher_id'=>'int',
+            'title' => 'string',
+            'descryption' => 'string',
+            'teacher_id' => 'int',
         ]);
         //$data['descryption'] = nl2br($data['descryption']);
 
         $course->update($data);
-        return redirect()->route('course.show',$course->id);
+        return redirect()->route('course.show', $course->id);
     }
+
     public function destroy(Course $course)
     {
+        $course_pages = CoursePage::where(['course_id' => $course->id]);
+        $cid = $course->id;
+        $course_pages->each(function ($course_page) use ($cid){
+            $pid = $course_page->page_id;
+            $page =  Page::where(['id' => $pid]);
+            $page->each(function ($p) {
+                Storage::disk('public')->delete($p->image);
+                $p->delete();
+            });
+
+
+            $course_page->delete();
+        });
+
+
         $course->delete();
+
         return redirect()->route('course.main');
 
     }
@@ -45,25 +68,67 @@ class CourseController extends Controller
     {
 
         $data = request()->validate([
-            'title'=>'string',
-            'descryption'=>'string',
-            'teacher_id'=>'int',
+            'title' => 'string',
+            'descryption' => 'string',
+            'teacher_id' => 'int',
         ]);
         //$data['descryption'] = $data['descryption'].replace("\n", "&lt");
         Course::create($data);
         return redirect()->route('course.main');
     }
 
+
     public function show(Course $course)
     {
-
-        return view('course.show',compact('course'));
+//        dd($course->pages);
+        return view('course.show', compact('course'));
     }
 
+    public function page_show(Course $course, Page $page)
+    {
+        return view('page.show', compact('page', 'course'));
+    }
+
+    public function page_create(Course $course)
+    {
+//        dd(z);
+
+        return view('page.create', compact('course'));
+    }
+
+    public function page_store(Course $course)
+    {
+        $data = request()->only('name', 'text');
+        $request = request();
+        $path = "";
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('uploads', 'public');
+
+        }
+
+
+//        $path = request()->file('image')->store('uploads','public');
+//        $path = request()->file('image');
+        $dataWithImage = $data + ['image' => $path];
+
+        $page = Page::create($dataWithImage);
+
+        $cid = $course->id;
+        $pid = $page->id;
+        CoursePage::create(['course_id' => $cid, 'page_id' => $pid]);
+
+        return redirect()->route('course.show', ['course' => $course->id]);
+    }
 
     public function register()
     {
         return view('register');
+
+    }
+
+    public function logging()
+    {
+        return view('logging');
 
     }
 

@@ -21,7 +21,7 @@
             <input type="text" name="teacher_id" class="form-control" id="teacher_id">
             <br>
         </div>
-        <button type="submit" class="btn btn-success">Создать запись</button>
+        <button type="submit" class="btn btn-success">Создать курс</button>
     </form>
 </div>
 @endsection

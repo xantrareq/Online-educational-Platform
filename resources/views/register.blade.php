@@ -24,6 +24,10 @@
                                         <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
                                     </div>
                                     <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example1cg">Логин (по логину вы будете входить в аккаунт)</label>
+                                        <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                                    </div>
+                                    <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example4cg">Пароль</label>
                                         <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
                                     </div>
@@ -42,11 +46,10 @@
 
                                     <div class="d-flex justify-content-center">
                                         <button type="button"
-                                                class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Регистрация</button>
+                                                class="btn btn-success btn-block btn-lg gradient-custom-4">Регистрация</button>
                                     </div>
 
-                                    <p class="text-center text-muted mt-5 mb-0">Уже есть аккаунт?<a href="#!"
-                                                                                                            class="fw-bold text-body"><u> Авторизуйтесь здесь</u></a></p>
+                                    <p class="text-center text-muted mt-5 mb-0">Уже есть аккаунт?<a href="logging" class="fw-bold text-body"><u> Авторизуйтесь здесь</u></a></p>
 
                                 </form>
 
