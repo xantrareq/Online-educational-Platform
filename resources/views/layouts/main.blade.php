@@ -15,7 +15,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <nav class="navbar bg-body navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-bottom-dark"
+        <nav class="navbar bg-body navbar-expand-sm bg-body-tertiary bg-dark border-bottom border-bottom-dark"
              data-bs-theme="dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{route('welcome_page')}}">

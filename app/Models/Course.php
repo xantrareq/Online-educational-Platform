@@ -12,20 +12,7 @@ class Course extends Model
     protected $table = 'courses'; //на всякий прописываем, что работаем именно с моделью CourseController
     use HasFactory;
     use SoftDeletes;
-    protected static function boot()
-    {
-        parent::boot();
-        static::deleting(function ($course) {
-            foreach ($course->pages as $page) {
-                // Удалить изображение, если оно существует
-                if (Storage::exists($page->image)) {
-                    Storage::delete($page->image);
-                }
-            }
 
-            $course->pages()->delete();
-        });
-    }
     //Мягкое удаление
     //Разрешает менять данные в таблице
     protected $guarded = [];

@@ -1,8 +1,9 @@
 @extends('layouts.main')
 @section('content')
 <div>
+    <h3>Создать курс</h3>
+    <a class="btn btn-outline-success" href="{{route('course.main')}}" role="button">Назад</a>
 
-    <h3>Курсы</h3>
     <form class="gx-3 gy-2" action="{{route('course.store')}}" method="post">
         @csrf
         <div class="col col-sm-5">

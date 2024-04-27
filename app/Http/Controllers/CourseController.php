@@ -98,17 +98,29 @@ class CourseController extends Controller
 
     public function page_store(Course $course)
     {
-        $data = request()->only('name', 'text');
         $request = request();
+
+        $data = $request->validate([
+            'name' => 'required|max:255',
+            'text' => 'required',
+            'homework_condition' => 'required',
+            'answer' => 'required',
+            'youtube_link' => 'required|url',
+             // Проверка на наличие файла, что это изображение и максимальный размер файла
+        ]);
         $path = "";
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('uploads', 'public');
-
         }
 
-
-//        $path = request()->file('image')->store('uploads','public');
-//        $path = request()->file('image');
+        if (isset($data['youtube_link'])) {
+            $youtube_link = $data['youtube_link'];
+            $parts = explode('=', $youtube_link);
+            if (count($parts) > 1) {
+                $value = $parts[1];
+                $data['youtube_link'] = "https://www.youtube.com/embed/".$parts[1];
+            }
+        }
         $dataWithImage = $data + ['image' => $path];
 
         $page = Page::create($dataWithImage);
