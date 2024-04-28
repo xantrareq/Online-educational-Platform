@@ -2,11 +2,10 @@
 @section('content')
     <div>
         <div>
-
+            <h3>Урок: {{$page->name}}</h3>
             <form action="{{route('page.destroy',[$course->id,$page->id])}}" method="post">
                 @csrf
                 @method('delete')
-                <br>
                 <a class="btn btn-outline-success" href="{{route('course.show',$course->id)}}" role="button">Назад</a>
                 <a class="btn btn-success" href="{{route('page.edit',[$course->id,$page->id])}}" role="button">Изменить содержание</a>
 
@@ -14,7 +13,6 @@
             </form>
         </div>
         <br>
-        <h5>Урок: {{$page->name}}</h5>
         <div>
                 <div>
                     @isset($page->youtube_link)
@@ -30,7 +28,18 @@
         </div>
         <div>
             {!! nl2br($page->text) !!}
-
+        </div>
+        <div>
+            @isset($page->homework_condition)
+                <h5>Домашнее задание</h5>
+                {!! nl2br($page->homework_condition) !!}
+            @endisset
+        </div>
+        <div>
+            @isset($page->homework_condition)
+                <h5>Ответ</h5>
+                {!! nl2br($page->answer) !!}
+            @endisset
         </div>
     </div>
 @endsection

@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('content')
 <div>
+
     <h3>Добавить страницу курсу {{$course->title}}</h3>
     <a class="btn btn-outline-success" href="{{route('course.show',$course->id)}}" role="button">Назад</a>
 

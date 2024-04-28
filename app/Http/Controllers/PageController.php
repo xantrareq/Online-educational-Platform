@@ -21,24 +21,48 @@ class PageController extends Controller
         return view('page.show', compact('page'));
     }
 
-    public function edit(Page $page)
+    public function edit(Course $course,Page $page)
     {
 
-        return view('page.edit', compact('page'));
+        return view('page.edit', compact('page', 'course'));
     }
 
     public function update(Course $course, Page $page)
     {
-        $data = request()->only('name', 'text');
+
         $request = request();
-        $path = "";
+
+        $data = $request->validate([
+            'name' => 'required|max:255',
+            'text' => 'required',
+            'homework_condition' => 'sometimes',
+            'answer' => 'sometimes',
+            'youtube_link' => 'sometimes|url',
+        ]);
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('uploads', 'public');
+            $str2 = $page->image;
+            Storage::disk('public')->delete($str2);
+        }
+        else {
+            $path = $page->image;
+        }
+        if ($request->has('check_delete_photo')) {
+            Storage::disk('public')->delete($page->image);
 
+        }
+        if (isset($data['youtube_link'])) {
+            $youtube_link = $data['youtube_link'];
+            $parts = explode('=', $youtube_link);
+            if (count($parts) > 1) {
+                $value = $parts[1];
+                $data['youtube_link'] = "https://www.youtube.com/embed/".$parts[1];
+            }
         }
         $dataWithImage = $data + ['image' => $path];
 
         $page->update($dataWithImage);
+
         return redirect()->route('course_page.show', [$course->id, $page->id]);
     }
 

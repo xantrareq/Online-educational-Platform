@@ -103,10 +103,9 @@ class CourseController extends Controller
         $data = $request->validate([
             'name' => 'required|max:255',
             'text' => 'required',
-            'homework_condition' => 'required',
-            'answer' => 'required',
-            'youtube_link' => 'required|url',
-             // Проверка на наличие файла, что это изображение и максимальный размер файла
+            'homework_condition' => 'sometimes',
+            'answer' => 'sometimes',
+            'youtube_link' => 'sometimes|url',
         ]);
         $path = "";
         if ($request->hasFile('image')) {

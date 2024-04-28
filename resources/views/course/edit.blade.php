@@ -1,8 +1,9 @@
 @extends('layouts.main')
 @section('content')
 <div>
+    <h3>Изменить содержание курса "{{$course->title}}"</h3>
+    <a class="btn btn-outline-success" href="{{route('course.show',$course->id)}}" role="button">Назад</a>
 
-    <h3>Курсы</h3>
     <form class="gx-3 gy-2" action="{{route('course.update',$course->id)}}" method="post">
         @csrf
         @method('patch')

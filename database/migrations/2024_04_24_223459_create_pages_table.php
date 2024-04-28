@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('text');
-            $table->string('image');
-            $table->text('homework_condition');
-            $table->string('answer');
+            $table->string('image')->nullable();
+            $table->text('homework_condition')->nullable();
+            $table->string('answer')->nullable();
             $table->string('youtube_link')->nullable();
             $table->timestamps();
             $table->softDeletes();
