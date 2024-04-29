@@ -42,12 +42,12 @@
                     {{--                        <button class="btn btn-outline-success" type="submit">Поиск</button>--}}
                     {{--                    </form>--}}
                     <div class="d-grid gap-2 d-md-block">
-                        <a class="btn btn-success" href="{{route('logging')}}" role="button">Вход</a>
-                        <a class="btn btn-outline-success" href="{{route('register')}}" role="button">Регистрация</a>
+{{--                        <a class="btn btn-success" href="{{route('logging')}}" role="button">Вход</a>--}}
+{{--                        <a class="btn btn-outline-success" href="{{route('register')}}" role="button">Регистрация</a>--}}
                     </div>
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{route('my_profile.main')}}" role="button"
+                            <a class="nav-link active" href="{{route('home')}}" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="http://localhost:8000/myassets/man.svg" width="35" height="35" alt="логотип">
                                 Профиль

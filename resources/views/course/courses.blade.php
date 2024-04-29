@@ -41,7 +41,7 @@
                         Выберите теги
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <button class="btn btn-primary mt-2" type="button" onclick="redirectToSearch2()">Поиск</button>
+                        <button class="btn btn-success mt-2" type="button" onclick="redirectToSearch2()">Поиск</button>
                         <div class="container-fluid">
                             @foreach ($tags->chunk(4) as $chunk)
                                 <div class="row">
