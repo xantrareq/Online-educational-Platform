@@ -23,5 +23,11 @@ class Course extends Model
     {
         return $this->belongsToMany(Page::class,'course_pages','course_id','page_id');
     }
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class,'course_tags','course_id','tag_id');
+    }
+
+
 
 }

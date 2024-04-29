@@ -40,17 +40,17 @@ class WelcomePage extends Controller
         $courseArr = [
             [
                 'title' => 'Hihiheha',
-                'descryption' => 'Ahihihie?Hihehea',
+                'description' => 'Ahihihie?Hihehea',
                 'teacher_id' => '1'
             ], [
                 'title' => 'Another Hihiheha',
-                'descryption' => 'Another Ahihihie?Hihehea',
+                'description' => 'Another Ahihihie?Hihehea',
                 'teacher_id' => '1'
             ],
         ];
         Course::create([
             'title' => 'Hihiheha',
-            'descryption' => 'Ahihihie?Hihehea',
+            'description' => 'Ahihihie?Hihehea',
             'teacher_id' => '1',
         ]);
         dd('created');

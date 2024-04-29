@@ -13,11 +13,17 @@
             <input type="text" name="name" class="form-control" id="name" value="{{$page->name}}">
             <br>
         </div>
+        @error('name')
+        <p class="text-danger">Введите название</p>
+        @enderror
         <div class="col col-sm-5">
             <label for="text">Текст</label>
             <textarea name="text" class="form-control" id="text" >{{$page->text}}</textarea>
             <br>
         </div>
+        @error('text')
+        <p class="text-danger">Введите текст</p>
+        @enderror
         <div class="col col-sm-5">
             <label for="homework_condition">Домашнее задание</label>
             <textarea name="homework_condition" class="form-control" id="homework_condition">{{$page->homework_condition}}</textarea>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\CoursePage;
+use App\Models\CourseTag;
 use App\Models\Page;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
@@ -12,32 +14,97 @@ class CourseController extends Controller
 
     public function main()
     {
-        //$courses = CourseController::all();
-        $courses = Course::all();
-        return view('course.courses', compact('courses'));
+        $data = request()->validate([
+            'title' => 'string',
+            'description' => 'string',
+            'teacher_id' => 'int',
+            'tags' => '',
+        ]);
+
+        $query = Course::query();
+        if (isset($data['teacher_id'])){
+            $query->where('teacher_id', $data['teacher_id'])->get();
+
+        }
+        if (isset($data['title'])) {
+            $query->where('title','like', "%{$data['title']}%");
+        }
+
+        if (isset($data['tags'])) {
+            $tags = $data['tags'];
+            $tags = explode(',', $tags);
+
+            $query->whereHas('tags', function ($query) use ($tags) {
+                $query->whereIn('name', $tags);
+            });
+        }
+        $courses = $query->paginate(10);
+//        $courses = Course::paginate(10);
+        $tags = Tag::all();
+        return view('course.courses', compact('courses','tags'));
     }
 
     public function create()
     {
-        return view('course.create');
+        $tags = Tag::all();
+        return view('course.create',compact('tags'));
+    }
+
+    public function store()
+    {
+
+        $data = request()->validate([
+            'title' => 'string',
+            'description' => 'string',
+            'teacher_id' => 'int',
+            'tags'=>'',
+        ]);
+        if (isset($data['tags'])) {
+            $tags = $data['tags'];
+            unset($data['tags']);
+        }
+        $course = Course::create($data);
+        if (isset($tags)) {
+            $course->tags()->attach($tags);
+        }
+
+//        foreach ($tags as $tag) {
+//            CourseTag::firstOrCreate([
+//                'tag_id'=>$tag,
+//                'course_id'=>$course->id,
+//            ]);
+//        }
+
+        return redirect()->route('course.main');
     }
 
     public function edit(Course $course)
     {
+        $tags = Tag::all();
 
-        return view('course.edit', compact('course'));
+        return view('course.edit', compact('course','tags'));
     }
 
     public function update(Course $course)
     {
         $data = request()->validate([
             'title' => 'string',
-            'descryption' => 'string',
+            'description' => 'string',
             'teacher_id' => 'int',
+            'tags' => '',
         ]);
-        //$data['descryption'] = nl2br($data['descryption']);
+        if (isset($data['tags'])) {
+            $tags = $data['tags'];
+            unset($data['tags']);
+        }
 
         $course->update($data);
+        if (isset($tags)){
+            $course->tags()->sync($tags);
+        }
+        else{
+            $course->tags()->detach();
+        }
         return redirect()->route('course.show', $course->id);
     }
 
@@ -64,24 +131,13 @@ class CourseController extends Controller
 
     }
 
-    public function store()
-    {
 
-        $data = request()->validate([
-            'title' => 'string',
-            'descryption' => 'string',
-            'teacher_id' => 'int',
-        ]);
-        //$data['descryption'] = $data['descryption'].replace("\n", "&lt");
-        Course::create($data);
-        return redirect()->route('course.main');
-    }
 
 
     public function show(Course $course)
     {
-//        dd($course->pages);
-        return view('course.show', compact('course'));
+        $pages = $course->pages()->paginate(7); // 10 - количество страниц на одной странице пагинации
+        return view('course.show', compact('course','pages'));
     }
 
     public function page_show(Course $course, Page $page)
@@ -105,7 +161,7 @@ class CourseController extends Controller
             'text' => 'required',
             'homework_condition' => 'sometimes',
             'answer' => 'sometimes',
-            'youtube_link' => 'sometimes|url',
+            'youtube_link' => 'nullable|url',
         ]);
         $path = "";
         if ($request->hasFile('image')) {
