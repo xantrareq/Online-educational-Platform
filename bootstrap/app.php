@@ -16,6 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminPanelMiddleware::class,
+            'checkCourseUser' => \App\Http\Middleware\CheckCourseUser::class,
+            'AuthCheck' => \App\Http\Middleware\CheckAuth::class,
 
         ]);
     })

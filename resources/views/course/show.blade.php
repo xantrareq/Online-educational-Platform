@@ -16,8 +16,18 @@
                 @csrf
                 @method('delete')
                 <a class="btn btn-outline-success" href="{{route('course.main')}}" role="button">Назад</a>
-                <a class="btn btn-success" href="{{route('course.edit',$course->id)}}" role="button">Изменить содержание</a>
-                <input class="btn btn-outline-danger" value="Удалить курс" type="submit">
+                @php
+                    use Illuminate\Support\Facades\Auth;
+                    $userId = Auth::id();
+                    $courseTeacherId = $course->teacher_id;
+                @endphp
+
+                @if($userId == $courseTeacherId)
+                    <a class="btn btn-success" href="{{route('course.edit',$course->id)}}" role="button">Изменить содержание</a>
+                    <input class="btn btn-outline-danger" value="Удалить курс" type="submit">
+                @endif
+
+
             </form>
         </div>
         <br>

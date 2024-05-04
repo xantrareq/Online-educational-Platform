@@ -2,7 +2,17 @@
 @section('content')
 <div>
     <h3>Курсы</h3>
-    <a class="btn btn-success" href="{{route('course.create')}}" role="button">Создать курс</a>
+    @php
+        use Illuminate\Support\Facades\Auth;
+        $userId = Auth::id();
+    @endphp
+
+    @if($userId)
+        <a class="btn btn-success" href="{{route('course.create')}}" role="button">Создать курс</a>
+    @else
+        <span>Авторизуйтесь, чтобы создавать курсы.</span>
+    @endif
+
     <div><br></div>
     <div>
 
@@ -34,6 +44,7 @@
                         window.location.href = url;
                     }
                 </script>
+
 
 
                 <div style="margin: 11px" class="dropdown">
