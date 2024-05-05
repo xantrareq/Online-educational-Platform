@@ -19,7 +19,9 @@ class CourseFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->text,
-            'teacher_id' => random_int(1,200),
+
+            'likes' => random_int(1,1000),
+            'preview' => $this->faker->text,
 
 
         ];

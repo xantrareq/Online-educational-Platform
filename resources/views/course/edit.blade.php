@@ -4,7 +4,7 @@
         <h3>Изменить содержание курса "{{$course->title}}"</h3>
         <a class="btn btn-outline-success" href="{{route('course.show',$course->id)}}" role="button">Назад</a>
 
-        <form class="gx-3 gy-2" action="{{route('course.update',$course->id)}}" method="post">
+        <form class="gx-3 gy-2" action="{{route('course.update',$course->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('patch')
             <div class="col col-sm-5">
@@ -49,7 +49,12 @@
                 @endforeach
 
             </div>
-
+            <div>
+                <h5>Превью</h5>
+                <div class="form-group">
+                    <input type="file" name="preview">
+                </div>
+            </div>
             <button type="submit" class="btn btn-success">Изменить запись</button>
         </form>
     </div>

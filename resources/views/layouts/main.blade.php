@@ -32,12 +32,13 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link disabled">Настройки</a>
+                        <a class="nav-link active" href="{{route('course.my_courses')}}">Мои курсы</a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link">Отладка</a>
                     </li>
+
                 </ul>
                 {{--                    <form class="d-flex" role="search">--}}
                 {{--                        <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">--}}
@@ -97,6 +98,7 @@
 </div>
 </body>
 </html>
+
 
 
 

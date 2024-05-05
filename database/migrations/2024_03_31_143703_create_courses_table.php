@@ -14,7 +14,9 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->integer('teacher_id');
+            $table->integer('teacher_id')->nullable();
+            $table->string('preview') -> nullable();
+            $table->unsignedBigInteger('likes') -> nullable();
             $table->timestamps();
             $table->softDeletes();
         });
