@@ -57,6 +57,19 @@
                     <a class="btn btn-outline-success" href="/courses/list">Сбросить</a>
                 </div>
             </div>
+            <br>
+            <div class="col-1 d-flex">
+                <input id="searchInputId" class="form-control me-2" type="search" placeholder="Поиск по id"
+                       aria-label="Поиск по id">
+                <button class="btn btn-outline-success" type="submit" onclick="redirectToSearch0()">Поиск</button>
+            </div>
+            <script>
+                function redirectToSearch0() {
+                    var searchQuery = document.getElementById('searchInputId').value;
+                    var url = "/courses/" + encodeURIComponent(searchQuery);
+                    window.location.href = url;
+                }
+            </script>
             <script>
                 function redirectToSearch1() {
                     var searchQuery = document.getElementById('searchInput').value;
@@ -110,7 +123,6 @@
                                     </a>
                                 </div>
                                 <div class="col-1 d-flex align-items-center justify-content-center">
-
                                     @isset ($course->preview)
                                         @if ($course->preview != "" && Storage::exists('public/' . $course->preview))
                                             <img class="img-fluid" style="width: auto; height: 60px;" src="{{asset('/storage/' . $course->preview)}}" alt="">
@@ -118,9 +130,6 @@
                                             <img src="http://localhost:8000/myassets/Frame3.svg" width="60" height="60" alt="eye">
                                         @endif
                                     @endisset
-
-
-
                                 </div>
                                 <div class="col-1">
                                     <img src="http://localhost:8000/myassets/blue_heart.svg" width="25" height="25"
