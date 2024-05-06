@@ -11,6 +11,8 @@ Route::group(['namespace'=>'App\Http\Controllers\Course'], function () {
 
 Route::group(['namespace'=>'App\Http\Controllers\Course','middleware' => 'AuthCheck'], function () {
     Route::get('/course/create', 'CreateController')->name('course.create');
+    Route::get('/courses/{course}/like', 'LikeCourseController')->name('course.like');
+    Route::get('/liked', 'ShowLikedController')->name('course.ShowLiked');
     Route::post('/course/store', 'StoreController')->name('course.store');
     Route::get('/my_courses', 'MyCoursesController')->name('course.my_courses');
 });

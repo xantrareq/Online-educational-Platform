@@ -45,9 +45,13 @@ class User extends Authenticatable
         ];
     }
 
+//    public function courses()
+//    {
+//        return $this->belongsToMany(Page::class,'course_users','user_id','course_id');
+//    }
     public function courses()
     {
-        return $this->belongsToMany(Page::class,'course_users','user_id','course_id');
+        return $this->belongsToMany(Course::class,'liked_courses','user_id','course_id');
     }
 
 

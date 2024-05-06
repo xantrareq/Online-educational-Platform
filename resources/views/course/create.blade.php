@@ -3,7 +3,7 @@
     <div>
 
         <h3>Создать курс</h3>
-        <a class="btn btn-outline-success" href="{{route('course.main')}}" role="button">Назад</a>
+        <a class="btn btn-outline-success" href="{{route('course.my_courses')}}" role="button">Назад</a>
 
         <form class="gx-3 gy-2" action="{{route('course.store')}}" method="post" enctype="multipart/form-data">
             @csrf

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->text('homework_condition')->nullable();
             $table->string('answer')->nullable();
+            $table->integer('points')->nullable();
             $table->string('youtube_link')->nullable();
             $table->timestamps();
             $table->softDeletes();
