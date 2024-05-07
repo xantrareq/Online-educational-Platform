@@ -24,7 +24,6 @@ return new class extends Migration
             $table->foreign('page_id','course_page_page_fk')->on('pages')->references('id');
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

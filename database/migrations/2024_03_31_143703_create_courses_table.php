@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->string('preview') -> nullable();
             $table->unsignedBigInteger('likes') -> nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

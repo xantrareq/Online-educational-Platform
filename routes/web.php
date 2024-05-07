@@ -12,6 +12,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Course'], function () {
 Route::group(['namespace'=>'App\Http\Controllers\Course','middleware' => 'AuthCheck'], function () {
     Route::get('/course/create', 'CreateController')->name('course.create');
     Route::get('/courses/{course}/like', 'LikeCourseController')->name('course.like');
+    Route::get('/courses/{course}/unlike', 'UnLikeCourseController')->name('course.unlike');
     Route::get('/liked', 'ShowLikedController')->name('course.ShowLiked');
     Route::post('/course/store', 'StoreController')->name('course.store');
     Route::get('/my_courses', 'MyCoursesController')->name('course.my_courses');
@@ -24,7 +25,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Course','middleware' => 'checkC
 });
 
 
-Route::group(['namespace'=>'App\Http\Controllers\Page'], function () {
+Route::group(['namespace'=>'App\Http\Controllers\Page','middleware' => 'Liked'], function () {
     Route::get('/courses/{course}/{page}', 'ShowController')->name('course_page.show');
 });
 
@@ -35,7 +36,9 @@ Route::group(['namespace'=>'App\Http\Controllers\Page','middleware' => 'checkCou
     Route::patch('/courses/{course}/{page}/update', 'UpdateController')->name('page.update');
     Route::delete('/courses/{course}/{page}/destroy', 'DestroyController')->name('page.destroy');
 });
-
+Route::group(['namespace'=>'App\Http\Controllers\Page','middleware' => 'Liked'], function () {
+    Route::post('/{course}/{page}/answer', 'AnswerController')->name('page.answer');
+});
 
 
 

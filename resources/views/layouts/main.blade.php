@@ -38,9 +38,7 @@
                         <a class="nav-link active" href="{{route('course.ShowLiked')}}">Избранные курсы</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link">Отладка</a>
-                    </li>
+
 
                 </ul>
                 {{--                    <form class="d-flex" role="search">--}}

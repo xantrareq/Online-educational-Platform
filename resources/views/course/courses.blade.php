@@ -9,6 +9,8 @@
                 <h3>Курсы</h3>
                 @php
                     use Illuminate\Support\Facades\Auth;
+                    use App\Models\PageUser;
+
                     $userId = Auth::id();
                 @endphp
                 <br>
@@ -98,9 +100,21 @@
                                             @endisset
                                         </div>
                                         <div class="flex-fill">
-                                            <img src="http://localhost:8000/myassets/blue_heart.svg" width="25"
-                                                 height="25"
-                                                 alt="like">
+                                            @php
+                                                $userId = Auth::id();
+                                                $liked = \App\Models\LikedCourse::where(['user_id'=>$userId,'course_id'=>$course->id])->first();
+                                                $sum = 0;
+                                                $result = 0;
+                                            @endphp
+                                            @if($liked !== null)
+                                                <img src="http://localhost:8000/myassets/green_heart.svg" width="25"
+                                                     height="25"
+                                                     alt="like">
+                                            @else
+                                                <img src="http://localhost:8000/myassets/blue_heart.svg" width="25"
+                                                     height="25"
+                                                     alt="like">
+                                            @endif
                                             <a>{{$course->likes}}</a>
                                         </div>
                                         <div class="col-9">

@@ -13,7 +13,7 @@
                         @method('delete')
                         <a class="btn btn-outline-success" href="{{route('course.show',$course->id)}}" role="button">Назад</a>
                         @php
-                            use Illuminate\Support\Facades\Auth;
+                            use App\Models\PageUser;use Illuminate\Support\Facades\Auth;
                             $userId = Auth::id();
                             $courseTeacherId = $course->teacher_id;
                         @endphp
@@ -51,11 +51,65 @@
                     @endisset
                 </div>
                 <div>
+                    {{--                    @isset($page->homework_condition)--}}
+                    {{--                        <h5>Ответ</h5>--}}
+                    {{--                        {!! nl2br($page->answer) !!}--}}
+                    {{--                    @endisset--}}
                     @isset($page->homework_condition)
-                        <h5>Ответ</h5>
-                        {!! nl2br($page->answer) !!}
+                        <form method="post" action="{{route('page.answer',[$course,$page])}}">
+                            @csrf
+                            @php
+                                $pageId = $page->id;
+                                $userId = Auth::id();
+                                $userPage = PageUser::where(['user_id'=>$userId,'page_id'=>$pageId])->first();
+                            @endphp
+                            <div class="col col-sm-5">
+                                @if($userPage->points !== null)
+                                    @if($userPage->points !== 0)
+                                        <label for="answer" class="form-label">Ответ</label>
+                                        <br>
+                                        <label for="answer" class="text-success">Верный результат</label>
+                                        <input type="text" name="answer" class="form-control" id="answer" disabled
+                                               value="{{$page->answer}}">
+                                        <br>
+                                        <div>
+                                            <input class="btn btn-outline-success" value="Дать ответ" type="submit">
+                                        </div>
+                                    @elseif($userPage->trys === 0 and $userPage->points === 0)
+                                        <label for="answer" class="form-label">Ответ</label>
+                                        <br>
+                                        <label for="answer" class="text-danger">Вы не смогли дать ответ</label>
+                                        <input type="text" name="answer" class="form-control" id="answer" disabled>
+                                    @else
+                                        <label for="answer" class="form-label">Ответ</label>
+                                        <br>
+                                        <label for="answer" class="text-danger">Кол-во попыток: {{$userPage->trys}}</label>
+                                        <input type="text" name="answer" class="form-control" id="answer">
+                                        <br>
+                                        <div>
+                                            <input class="btn btn-outline-success" value="Дать ответ" type="submit">
+                                        </div>
+                                    @endif
+                                @else
+                                    <label for="answer" class="form-label">Ответ</label>
+                                    <br>
+                                    <label for="answer" class="text-danger">Кол-во попыток: {{$userPage->trys}}</label>
+                                    <input type="text" name="answer" class="form-control" id="answer">
+                                    <br>
+                                    <div>
+                                        <input class="btn btn-outline-success" value="Дать ответ" type="submit">
+                                    </div>
+                                @endif
+
+                                <br>
+                            </div>
+
+                        </form>
                     @endisset
+
+
                 </div>
+                <br>
             </div>
         </div>
     </div>

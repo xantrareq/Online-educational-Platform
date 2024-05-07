@@ -39,6 +39,16 @@
                 <input type="text" name="youtube_link" class="form-control" id="youtube_link">
                 <br>
             </div>
+            <div class="col col-sm-5">
+                <label for="points" class="form-label">Баллы за задание</label>
+                <input type="text" name="points" class="form-control" id="points">
+                <br>
+            </div>
+            <div class="col col-sm-5">
+                <label for="trys" class="form-label">Попытки</label>
+                <input type="text" name="trys" class="form-control" id="trys">
+                <br>
+            </div>
             <div>
                 <div class="form-group">
                     <input type="file" name="image">

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('answer')->nullable();
             $table->integer('points')->nullable();
             $table->string('youtube_link')->nullable();
+            $table->unsignedBigInteger('trys')->default(3);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

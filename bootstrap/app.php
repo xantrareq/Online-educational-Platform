@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\AdminPanelMiddleware::class,
             'checkCourseUser' => \App\Http\Middleware\CheckCourseUser::class,
             'AuthCheck' => \App\Http\Middleware\CheckAuth::class,
+            'Liked' => \App\Http\Middleware\CheckLiked::class,
 
         ]);
     })
