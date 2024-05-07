@@ -32,6 +32,7 @@
                             <a class="btn btn-success" href="{{route('course.edit',$course->id)}}" role="button">Изменить
                                 содержание</a>
                             <input class="btn btn-outline-danger" value="Удалить курс" type="submit">
+                            <a class="btn btn-outline-success" href="{{route('course.students',$course->id)}}" role="button">Просмотр результатов</a>
                         @endif
                         @php
                             use App\Models\PageUser;
