@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CourseTag extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     //Мягкое удаление
     //Разрешает менять данные в таблице

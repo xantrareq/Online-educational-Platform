@@ -18,6 +18,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Course','middleware' => 'AuthCh
     Route::get('/my_courses', 'MyCoursesController')->name('course.my_courses');
 });
 
+
 Route::group(['namespace'=>'App\Http\Controllers\Course','middleware' => 'checkCourseUser'], function () {
     Route::get('/courses/{course}/edit', 'EditController')->name('course.edit');
     Route::get('/courses/{course}/students', 'StudentsController')->name('course.students');
@@ -70,4 +71,9 @@ Route::get('/my_profile', [App\Http\Controllers\ProfileController::class,'main']
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['namespace'=>'App\Http\Controllers\Auth','middleware' => 'AuthCheck'], function () {
+    Route::post('changepass/{user}', 'ChangePass')->name('auth.changepass');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/pass_changed', [App\Http\Controllers\HomeController::class, 'passchanged'])->name('pass_changed');
+
+});

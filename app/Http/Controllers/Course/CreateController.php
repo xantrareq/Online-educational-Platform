@@ -15,6 +15,7 @@ class CreateController extends Controller
 
     public function __invoke()
     {
+
         $tags = Tag::all();
         return view('course.create', compact('tags'));
 

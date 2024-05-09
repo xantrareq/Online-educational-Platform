@@ -43,7 +43,7 @@
                                             <div class="flex-fill">
                                                 @isset ($course->preview)
                                                     @if ($course->preview != "" && Storage::exists('public/' . $course->preview))
-                                                        <img class="img-fluid" style="width: auto; height: 60px;"
+                                                        <img class="img-fluid" style="width: 60px; height: 60px;"
                                                              src="{{asset('/storage/' . $course->preview)}}" alt="">
                                                     @else
                                                         <img src="http://localhost:8000/myassets/Frame3.svg" width="60"
@@ -53,7 +53,7 @@
                                                 @endisset
                                             </div>
                                             <div class="flex-fill">
-                                                <img src="http://localhost:8000/myassets/blue_heart.svg" width="25"
+                                                <img src="http://localhost:8000/myassets/green_heart.svg" width="25"
                                                      height="25"
                                                      alt="like">
                                                 <a>{{$course->likes}}</a>

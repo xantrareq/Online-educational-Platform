@@ -11,6 +11,7 @@ class Course extends Model
 {
     protected $table = 'courses'; //на всякий прописываем, что работаем именно с моделью CourseController
     use HasFactory;
+    public $timestamps = false;
 
     //Мягкое удаление
     //Разрешает менять данные в таблице

@@ -6,46 +6,50 @@
                 use App\Models\Page;
             @endphp
 
-            <div class="col-sm-1 col-md-1"></div>
-            <div class="col-sm-10 col-md-10">
+            <div class="col-1 col-1"></div>
+            <div class="col-10 col-10">
                 <br>
                 <h3>Результаты {{$userName}} </h3>
-                <a class="btn btn-outline-success" href="{{route('course.students',$course->id)}}" role="button">Назад</a>
-                {{$userPages->withQueryString()->links()}}
-                <div>
-                    <div class="row">
-                        @foreach($userPages as $upage)
-                            @php
-                                $page = Page::where('id',$upage->page_id)->first();
-                                $vis = 0;
-                                if($page->points !== null)
-                                    $vis = 1;
-                            @endphp
-                            @if($vis === 1)
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-body d-flex align-items-center justify-content-center">
-                                            <div class="flex-fill align-items-center">
-
-                                                <div class="flex-fill">
-                                                    Урок: {{$page->name}}
-                                                </div>
-                                                <div class="flex-fill">
-                                                    Результат: {{$upage->points}}
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    @endif
-                                </div>
-                                @endforeach
-                    </div>
+                <div class="p-1">
+                    <a class="btn btn-outline-success" href="{{route('course.students',$course->id)}}"
+                       role="button">Назад</a>
                 </div>
+
+                {{$userPages->withQueryString()->links()}}
+
+                @foreach($userPages as $upage)
+                    @php
+                        $page = Page::where('id',$upage->page_id)->first();
+                        $vis = 0;
+                        if($page->points !== null)
+                            $vis = 1;
+                    @endphp
+                    @if($vis === 1)
+                        <div class="card">
+                            <div class="card-body  align-items-center justify-content-center">
+                                <div class="flex-fill align-items-center">
+                                    <div class="flex-fill">
+                                        Урок: {{$page->name}}
+                                    </div>
+                                    <div class="flex-fill">
+                                        Результат: {{$upage->points}}
+                                    </div>
+                                    <div class="flex-fill">
+                                        Время выполнения: {{$upage->time}}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
-            <div class="col-sm-1"></div>
         </div>
+
+
     </div>
+
+    <div class="col-sm-1"></div>
 
 @endsection
 

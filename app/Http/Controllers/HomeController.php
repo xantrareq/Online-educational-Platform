@@ -17,4 +17,8 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function passchanged()
+    {
+        return view('passchng');
+    }
 }

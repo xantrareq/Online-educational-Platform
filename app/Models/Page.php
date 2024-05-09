@@ -10,6 +10,8 @@ class Page extends Model
 {
     protected $table = 'pages'; //на всякий прописываем, что работаем именно с моделью CourseController
     use HasFactory;
+    public $timestamps = false;
+
     protected $guarded = [];
     //protected $fillable = []; - запрещает менять данные в таблице.
 }

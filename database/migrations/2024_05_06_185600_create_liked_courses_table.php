@@ -22,7 +22,6 @@ return new class extends Migration
 
             $table->foreign('course_id','liked_courses_course_fk')->on('courses')->references('id');
             $table->foreign('user_id','liked_courses_user_fk')->on('users')->references('id');
-            $table->timestamps();
         });
 
     }

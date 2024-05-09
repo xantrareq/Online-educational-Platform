@@ -10,6 +10,7 @@ class CoursePage extends Model
 {
     use HasFactory;
     //Разрешает менять данные в таблице
+    public $timestamps = false;
 
     protected $fillable = ['course_id', 'page_id'];
 

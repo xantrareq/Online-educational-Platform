@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('points')->nullable();
             $table->unsignedBigInteger('trys')->nullable();
             $table->text('answer')->nullable();
+            $table->dateTime('time')->nullable();
 
 
             $table->index('page_id','page_user_page_idx');
@@ -25,7 +26,6 @@ return new class extends Migration
 
             $table->foreign('page_id','page_user_page_fk')->on('pages')->references('id');
             $table->foreign('user_id','page_user_user_fk')->on('users')->references('id');;
-            $table->timestamps();
         });
     }
 

@@ -17,7 +17,8 @@ return new class extends Migration {
             $table->integer('teacher_id')->nullable();
             $table->string('preview') -> nullable();
             $table->unsignedBigInteger('likes') -> nullable();
-            $table->timestamps();
+
+
         });
     }
 

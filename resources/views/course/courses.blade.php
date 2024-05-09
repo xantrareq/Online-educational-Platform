@@ -9,7 +9,6 @@
                 <h3>Курсы</h3>
                 @php
                     use Illuminate\Support\Facades\Auth;
-                    use App\Models\PageUser;
 
                     $userId = Auth::id();
                 @endphp
@@ -28,7 +27,6 @@
                         <button class="btn btn-outline-success" type="submit" onclick="redirectToSearch1()">Поиск
                         </button>
                     </div>
-                    {{--                    <div class="col-sm-1 col-xs-1 col-md-1"></div>--}}
                     <div class="p-2 dropdown">
                         <button class="btn btn-outline-success dropdown-toggle" type="button"
                                 id="dropdownMenuButton"
@@ -90,7 +88,8 @@
                                         <div class="flex-fill">
                                             @isset ($course->preview)
                                                 @if ($course->preview != "" && Storage::exists('public/' . $course->preview))
-                                                    <img class="img-fluid" style="width: auto; height: 60px;"
+                                                    <img class="img-fluid" style="width: 60px; height: 60px;"
+                                                         height="60"
                                                          src="{{asset('/storage/' . $course->preview)}}" alt="">
                                                 @else
                                                     <img src="http://localhost:8000/myassets/Frame3.svg" width="60"
@@ -106,7 +105,7 @@
                                                 $sum = 0;
                                                 $result = 0;
                                             @endphp
-                                            @if($liked !== null)
+                                            @if($liked !== null and $liked->visible!==0)
                                                 <img src="http://localhost:8000/myassets/green_heart.svg" width="25"
                                                      height="25"
                                                      alt="like">

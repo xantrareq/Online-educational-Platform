@@ -9,28 +9,33 @@
             <div class="col-sm-1 col-md-1"></div>
             <div class="col-sm-10 col-md-10">
                 <br>
-                <h3>Результаты</h3>
-                <a class="btn btn-outline-success" href="{{route('course.show',$course->id)}}" role="button">Назад</a>
+                <h3>Результаты курса {{$course->title}}</h3>
+                <div class="p-1">
+                    <a class="btn btn-outline-success" href="{{route('course.show',$course->id)}}" role="button">Назад</a>
+
+                </div>
 
                 {{$userscourses->withQueryString()->links()}}
                 <div>
                     <div class="row">
 
-                        @foreach($userscourses as $course)
+                        @foreach($userscourses as $cour)
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-body d-flex align-items-center justify-content-center">
                                         <div class="flex-fill align-items-center">
                                             @php
 
-                                                $usrId = $course->user_id;
+                                                $usrId = $cour->user_id;
                                                 $user = User::where('id',$usrId)->first();
                                                 $name = $user->name;
                                             @endphp
-                                            <a href="{{route('course.student.result',[$course,$usrId])}}">
+                                            <a href="{{route('course.student.result', ['course' => $course->id, 'user' => $user->id])}}">
                                                 <img src="http://localhost:8000/myassets/eye.svg" width="60" height="15"
                                                      alt="eye">
                                             </a>
+
+
                                         </div>
                                         <div class="flex-fill">
                                             <p class="card-text">id {{$usrId}}</p>

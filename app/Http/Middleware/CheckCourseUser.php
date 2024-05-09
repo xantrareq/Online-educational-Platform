@@ -17,6 +17,10 @@ class CheckCourseUser
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if(Auth::user()->role == 'admin')
+        {
+            return $next($request);
+        }
         $courseId = $request->route('course')->id;
         $userId = Auth::id();
 
@@ -24,9 +28,11 @@ class CheckCourseUser
             ->where('course_id', $courseId)
             ->first();
 
+
         if (!$userCourse) {
             return redirect()->back()->with('error', 'У вас нет доступа к этому курсу.');
         }
+
 
         return $next($request);
     }

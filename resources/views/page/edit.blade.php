@@ -1,68 +1,94 @@
 @extends('layouts.main')
 @section('content')
-<div>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
-    <h3>Изменить урок "{{$page->name}}" Курса "{{$course->title}}"</h3>
-    <a class="btn btn-outline-success" href="{{route('course_page.show',[$course->id,$page->id])}}" role="button">Назад</a>
+    <div>
+        <div class="p-4">
+            <h3>Изменить урок "{{$page->name}}" Курса "{{$course->title}}"</h3>
+        </div>
+
+
 
     <form class="gx-3 gy-2" action="{{route('page.update', ['course' => $course->id,$page->id])}} " method="post" enctype="multipart/form-data">
         @csrf
         @method('patch')
+
         <div class="col col-sm-5">
+            <a class="btn btn-success" href="{{route('course.show',$course->id)}}" role="button">Назад</a>
+            <br>
             <label for="name" class="form-label">Название</label>
-            <input type="text" name="name" class="form-control" id="name" value="{{$page->name}}">
-            <br>
-        </div>
-        @error('name')
-        <p class="text-danger">Введите название</p>
-        @enderror
-        <div class="col col-sm-5">
-            <label for="text">Текст</label>
-            <textarea name="text" class="form-control" id="text" >{{$page->text}}</textarea>
-            <br>
-        </div>
-        @error('text')
-        <p class="text-danger">Введите текст</p>
-        @enderror
-        <div class="col col-sm-5">
-            <label for="homework_condition">Домашнее задание</label>
-            <textarea name="homework_condition" class="form-control" id="homework_condition">{{$page->homework_condition}}</textarea>
-            <br>
-        </div>
-        <div class="col col-sm-5">
-            <label for="answer" class="form-label">Ответ на домашнее задание</label>
-            <input type="text" name="answer" class="form-control" id="answer" value="{{$page->answer}}">
-            <br>
-        </div>
-        <div class="col col-sm-5">
-            <label for="youtube_link" class="form-label">Ссылка</label>
-            <input type="text" name="youtube_link" class="form-control" id="youtube_link" value="{{$page->youtube_link}}">
-            <br>
-        </div>
-        <div class="col col-sm-5">
-            <label for="points" class="form-label">Баллы за задание</label>
-            <input type="text" name="points" class="form-control" id="points" value="{{$page->points}}">
-            <br>
-        </div>
-        <div class="col col-sm-5">
-            <label for="trys" class="form-label">Попытки</label>
-            <input type="text" name="trys" class="form-control" id="trys" value="{{$page->trys}}">
+            <input type="text" name="name" value="{{$page->name}}" class="form-control" id="name">
+            @error('name')
+            <p class="text-danger">Введите название</p>
+            @enderror
             <br>
         </div>
 
+        <div class="col col-sm-12">
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+            <script src="assets/plugins/summernote/lang/summernote-ru-RU.js"></script>
+            @error('text')
+            <p class="text-danger">Введите содержание</p>
+            @enderror
+            <label for="text">Содержание урока</label><textarea name="text" class="form-control" id="text">{{$page->text}}</textarea>
+            <br>
+            <script>
+                $(document).ready(function() {
+                    $('#text').summernote({
+                        lang:'ru-RU',
+                        placeholder: 'text',
+                        tabsize:2,
+                        height:300
+                    })
+                });
+            </script>
+
+        </div>
+
+
+
+
+        <div class="col col-sm-5 p-5">
+            <label for="homework_condition">Домашнее задание</label>
+            <textarea name="homework_condition" class="form-control"  id="homework_condition">{{$page->homework_condition}}</textarea>
+            <br>
+            <label for="answer" class="form-label">Ответ на домашнее задание</label>
+            <input type="text" name="answer" value="{{$page->answer}}" class="form-control" id="answer">
+            <br>
+            <label for="points" class="form-label">Баллы за задание</label>
+            <input type="text" name="points" class="form-control" value="{{$page->points}}" id="points">
+            <br>
+            <label for="trys" class="form-label">Попытки</label>
+            <input type="text" name="trys" value="{{$page->trys}}" class="form-control" id="trys">
+            <br>
+            <button type="button" class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#myModal">
+                Изменить урок
+            </button>
+        </div>
         <div>
-            <div class="form-group">
-                <input type="file" name="image">
+            <br>
+        </div>
+        <!-- Всплывающее окно -->
+        <div class="modal" tabindex="-1" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Изменение страницы</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Изменить страницу?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="btn btn-success">Сохранить изменения</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <br>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" name="check_delete_photo" id="check_delete_photo">
-            <label class="form-check-label" for="flexCheckDefault">
-                Удалить фото
-            </label>
-        </div>
-        <button type="submit" class="btn btn-success">Изменить урок</button>
     </form>
 </div>
 @endsection

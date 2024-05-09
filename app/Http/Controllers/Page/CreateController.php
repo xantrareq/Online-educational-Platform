@@ -15,7 +15,7 @@ class CreateController extends Controller
 
     public function __invoke(Course $course)
     {
-        return view('page.create', compact('course'));
+        return view('page.create2', compact('course'));
     }
 
 }

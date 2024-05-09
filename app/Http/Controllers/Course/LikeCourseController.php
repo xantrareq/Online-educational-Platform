@@ -33,6 +33,7 @@ class LikeCourseController extends Controller
             $likes = $course->likes + 1;
             $course->update(['likes'=>$likes]);
             $pages = $course->pages()->get();
+
             foreach ($pages as $page){
                 PageUser::create(['user_id'=>$user_id,'page_id'=>$page->id,'trys'=>$page->trys]);
             }
@@ -40,6 +41,17 @@ class LikeCourseController extends Controller
         else
         {
             $likes = $course->likes + 1;
+            $pages = $course->pages()->get();
+
+            foreach ($pages as $page) {
+                $pu = PageUser::where(['user_id' => $user_id, 'page_id' => $page->id])->first();
+
+                if ($pu === null)
+                {
+                    PageUser::create(['user_id'=>$user_id,'page_id'=>$page->id,'trys'=>$page->trys]);
+                }
+
+            }
             $course->update(['likes'=>$likes]);
             $lc = LikedCourse::where(['user_id' => $user_id, 'course_id' => $courseId]) -> first();
             $lc->update(['visible'=>true]);

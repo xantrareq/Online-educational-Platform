@@ -12,16 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pages', function (Blueprint $table) {
+
             $table->id();
+
             $table->string('name');
-            $table->text('text');
-            $table->string('image')->nullable();
+            $table->longText('text');
             $table->text('homework_condition')->nullable();
             $table->string('answer')->nullable();
             $table->integer('points')->nullable();
-            $table->string('youtube_link')->nullable();
-            $table->unsignedBigInteger('trys')->default(3);
-            $table->timestamps();
+            $table->unsignedBigInteger('trys')->nullable();
+
+
+
+
         });
     }
 

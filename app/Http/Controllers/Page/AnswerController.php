@@ -13,6 +13,7 @@ use App\Models\PageUser;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class AnswerController extends Controller
 {
@@ -29,15 +30,17 @@ class AnswerController extends Controller
         $up = PageUser::where(['user_id' => $user_id, 'page_id' => $page_id]) -> first();
 
 //        if($up->points===null )
-        if($up->points !== $page->points and $up->trys>0)
+        if($up->trys>0)
         {
+            $MyTime = Carbon::now('Europe/Moscow');
+            $time = $MyTime->toDateTimeString();
             if($data['answer'] === $page->answer)
             {
-                $up->update(['points'=>$page->points,'answer'=>$data['answer']]);
+                $up->update(['points'=>$page->points,'answer'=>$data['answer'],'time'=>$time]);
             }
             else
             {
-                $up->update(['points'=>0,'answer'=>$data['answer']]);
+                $up->update(['points'=>0,'answer'=>$data['answer'],'time'=>$time]);
             }
             $trys = $up->trys;
             $trys = $trys-1;

@@ -20,9 +20,11 @@ class StoreController extends Controller
         $request = request();
 
         $data = $request->validate([
-            'title' => 'string',
-            'description' => 'string',
+            'title' => 'string|max:100',
+            'description' => 'string|max:1200',
             'tags' => '',
+            'image' => 'sometimes|file|max:102400'
+
         ]);
         if (isset($data['tags'])) {
             $tags = $data['tags'];

@@ -9,5 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PageUser extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+
     protected $guarded = [];
 }

@@ -1,6 +1,8 @@
 @extends('layouts.main')
 @section('content')
+
     <div class="container-fluid ">
+
         <br>
         <div class="row ">
             <div class="col-sm-1 col-md-1"></div>
@@ -17,11 +19,35 @@
                             $userId = Auth::id();
                             $courseTeacherId = $course->teacher_id;
                         @endphp
-                        @if($userId == $courseTeacherId)
+                        @if($userId == $courseTeacherId or Auth::user()->role == 'admin')
                             <a class="btn btn-success" href="{{route('page.edit',[$course->id,$page->id])}}"
                                role="button">Изменить
                                 содержание</a>
-                            <input class="btn btn-outline-danger" value="Удалить страницу" type="submit">
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                    data-bs-target="#myModal">
+                                Удалить страницу
+                            </button>
+                            <!-- Всплывающее окно -->
+                            <div class="modal" tabindex="-1" id="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Заголовок всплывающего окна</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Закрыть"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Изменить запись?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Закрыть
+                                            </button>
+                                            <button type="submit" class="btn btn-danger">Удалить страницу</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endif
                     </form>
                 </div>
@@ -42,7 +68,7 @@
                     @endisset
                 </div>
                 <div>
-                    {!! nl2br($page->text) !!}
+                    <a>{!! ($page->text) !!}</a>
                 </div>
                 <div>
                     @isset($page->homework_condition)
@@ -51,10 +77,7 @@
                     @endisset
                 </div>
                 <div>
-                    {{--                    @isset($page->homework_condition)--}}
-                    {{--                        <h5>Ответ</h5>--}}
-                    {{--                        {!! nl2br($page->answer) !!}--}}
-                    {{--                    @endisset--}}
+
                     @isset($page->homework_condition)
                         <form method="post" action="{{route('page.answer',[$course,$page])}}">
                             @csrf
@@ -83,7 +106,8 @@
                                     @else
                                         <label for="answer" class="form-label">Ответ</label>
                                         <br>
-                                        <label for="answer" class="text-danger">Кол-во попыток: {{$userPage->trys}}</label>
+                                        <label for="answer" class="text-danger">Кол-во
+                                            попыток: {{$userPage->trys}}</label>
                                         <input type="text" name="answer" class="form-control" id="answer">
                                         <br>
                                         <div>
@@ -93,7 +117,9 @@
                                 @else
                                     <label for="answer" class="form-label">Ответ</label>
                                     <br>
-                                    <label for="answer" class="text-danger">Кол-во попыток: {{$userPage->trys}}</label>
+
+                                    <label for="answer" class="text-danger">Кол-во попыток: {{$page->trys}}</label>
+
                                     <input type="text" name="answer" class="form-control" id="answer">
                                     <br>
                                     <div>

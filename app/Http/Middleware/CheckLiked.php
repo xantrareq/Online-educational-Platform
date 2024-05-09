@@ -18,6 +18,10 @@ class CheckLiked
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if(Auth::user()->role == 'admin')
+        {
+            return $next($request);
+        }
         $courseId = $request->route('course')->id;
         $userId = Auth::id();
 

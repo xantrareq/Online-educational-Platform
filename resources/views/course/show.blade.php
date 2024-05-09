@@ -28,11 +28,37 @@
                             $courseTeacherId = $course->teacher_id;
                         @endphp
 
-                        @if($userId === $courseTeacherId and $userId !== null)
+                        @if(($userId === $courseTeacherId and $userId !== null) or Auth::user()->role == 'admin')
+
                             <a class="btn btn-success" href="{{route('course.edit',$course->id)}}" role="button">Изменить
                                 содержание</a>
-                            <input class="btn btn-outline-danger" value="Удалить курс" type="submit">
-                            <a class="btn btn-outline-success" href="{{route('course.students',$course->id)}}" role="button">Просмотр результатов</a>
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                    data-bs-target="#myModal">
+                                Удалть курс
+                            </button>
+                            <!-- Всплывающее окно -->
+                            <div class="modal" tabindex="-1" id="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Удаление курса</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Закрыть"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Удалить курс?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Закрыть
+                                            </button>
+                                            <button type="submit" class="btn btn-danger">Удалить</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="btn btn-outline-success" href="{{route('course.students',$course->id)}}"
+                               role="button">Просмотр результатов</a>
                         @endif
                         @php
                             use App\Models\PageUser;
@@ -45,13 +71,14 @@
                             }
                             $sum = 0;
                             $result = 0;
+                            $p = $course->pages;
                         @endphp
-                        @foreach($pages as $page)
+                        @foreach($p as $page)
                             @php
                                 $sum += $page->points;
                             @endphp
                         @endforeach
-                        @foreach($pages as $page)
+                        @foreach($p as $page)
                             @php
                                 $p=PageUser::where(['user_id'=>$userId,'page_id'=>$page->id])->first();
                                 if($p !== null){
@@ -85,17 +112,6 @@
                 <div>
 
                     <h5>Курс "{{$course->title}}"</h5>
-
-                    @if($liked !== null and $sum!=0)
-                        @php
-                            $result = $result/$sum;
-                        @endphp
-                        <div>Выполнено {{$result*100}}%</div>
-                        <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25"
-                             aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar bg-success" style="width: {{$result*100}}%"></div>
-                        </div>
-                    @endif
                     <div>id курса: {{$course->id}}</div>
                     @php
                         use App\Models\User;
@@ -112,12 +128,28 @@
                         <h5>Описание курса</h5>
                         {!! nl2br($course->description) !!}
                     </div>
+                    @if($liked !== null and $sum!=0)
+                        @php
+                            $progress = $result;
+                            $result = $result/$sum;
+                        @endphp
+                        <div>Выполнено {{ceil($result*100)}}% </div>
+                        <p style="color: green">{{$progress}}  /  {{$sum}}</p>
+                        <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25"
+                             aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar bg-success" style="width: {{$result*100}}%"></div>
+                        </div>
+                    @endif
                 </div>
                 <div>
                     @if($userId == $courseTeacherId)
-                        <a class="btn btn-outline-success" href="{{route('page.create',$course->id)}}" role="button">Добавить
-                            урок</a>
+                        <div class="p-1">
+                            <a class="btn btn-outline-success" href="{{route('page.create',$course->id)}}" role="button">Добавить
+                                урок</a>
+                        </div>
+
                     @endif
+
                 </div>
                 <div>
                     <div>
@@ -134,10 +166,33 @@
                         @if($userCourse->visible != 0)
                             {{$pages->links()}}
                             @foreach($pages as $page)
-                                <a href="{{route('course_page.show',['course' => $course->id, 'page' => $page->id])}}"><img
-                                        src="http://localhost:8000/myassets/eye.svg" width="60" height="15"
-                                        alt="eye"></a>
-                                Урок:   {{$page->name}} <br>
+                                @php
+                                    $Score = 0;
+                                    $UsrScore = 0;
+                                    if($page !== null){
+                                        $Score = $page->points;
+                                    }
+                                    $pu = PageUser::where(['user_id'=>Auth::id(),'page_id'=>$page->id])->first();
+                                    if($pu->points !==null){
+                                        $UsrScore = $pu->points;
+                                    }
+                                @endphp
+                                <div class="card">
+                                    <div class="flex-fill p-1">
+
+                                        <a href="{{route('course_page.show',['course' => $course->id, 'page' => $page->id])}}"><img
+                                                    src="http://localhost:8000/myassets/eye.svg" width="60" height="15"
+                                                    alt="eye"></a>
+                                        <text>Урок: {{$page->name}}</text>
+                                        @if($Score!=0)
+                                            <text style="color: green"> Баллы  {{$UsrScore}} / {{$Score}} <br></text>
+                                        @endif
+
+                                    </div>
+
+
+                                </div>
+
                             @endforeach
                         @endif
                     @endif
