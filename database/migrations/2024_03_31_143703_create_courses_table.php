@@ -16,6 +16,9 @@ return new class extends Migration {
             $table->text('description');
             $table->integer('teacher_id')->nullable();
             $table->string('preview') -> nullable();
+            $table->integer('min_points') ->nullable();
+            $table->integer('points_four') ->nullable();
+            $table->integer('points_five') ->nullable();
             $table->unsignedBigInteger('likes') -> nullable();
 
 

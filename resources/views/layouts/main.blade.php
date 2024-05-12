@@ -37,7 +37,7 @@
                         <a class="nav-link active" href="{{route('course.my_courses')}}">Мои курсы</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{route('course.ShowLiked')}}">Избранные курсы</a>
+                        <a class="nav-link active" href="{{route('course.ShowLiked')}}">Мое обучение</a>
                     </li>
 
 

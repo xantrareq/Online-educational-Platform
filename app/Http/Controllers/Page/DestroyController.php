@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\CoursePage;
 use App\Models\CourseTag;
+use App\Models\CourseUser;
 use App\Models\Page;
+use App\Models\PageUser;
 use App\Models\Tag;
 use DOMDocument;
 use Illuminate\Support\Facades\Storage;
@@ -18,9 +20,8 @@ class DestroyController extends Controller
     public function __invoke(Course $course, Page $page)
     {
         $olddom = new DOMDocument('1.0', 'UTF-8');
-        libxml_use_internal_errors(true);
-        $olddom->loadHTML('<meta http-equiv="Content-Type" content="text/html; charset=utf-8">' .$page->text);
-        libxml_clear_errors();
+        $olddom->loadHTML(mb_convert_encoding($page->text, 'HTML-ENTITIES', 'UTF-8'));
+
 
         $oldimages = $olddom->getElementsByTagName('img');
         //Storage::disk('public')->delete('uploads/17152744000.png');
@@ -40,7 +41,8 @@ class DestroyController extends Controller
         $pid = $page->id;
         $course_page = CoursePage::where(['course_id' => $cid, 'page_id' => $pid]);
         $course_page->delete();
-
+        $up = PageUser::where(['page_id' => $pid]);
+        $up->delete();
         $related_records = CoursePage::where('page_id', $pid)->count();
         if ($related_records == 0) {
             $page->delete();

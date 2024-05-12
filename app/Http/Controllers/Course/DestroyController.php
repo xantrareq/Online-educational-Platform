@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\CoursePage;
 use App\Models\CourseTag;
+use App\Models\CourseUser;
+use App\Models\LikedCourse;
 use App\Models\Page;
 use App\Models\Tag;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class DestroyController extends Controller
@@ -21,8 +24,12 @@ class DestroyController extends Controller
             $pid = $course_page->page_id;
             $page =  Page::where(['id' => $pid]);
             $page->each(function ($p) {
-                Storage::disk('public')->delete($p->image);
-                $p->delete();
+                if ($p->image && Storage::disk('public')->exists($p->image)) {
+                    Storage::disk('public')->delete($p->image);
+                    $p->delete();
+                }
+
+
             });
 
 
@@ -31,6 +38,13 @@ class DestroyController extends Controller
 
         $str2 = $course->preview;
         Storage::disk('public')->delete($str2);
+        $coursetags = CourseTag::where(['course_id'=>$course->id]);
+        $coursetags->delete();
+        $course_users = CourseUser::where(['course_id'=>$course->id]);
+        $course_users->delete();
+        $liked = LikedCourse::where(['course_id'=>$course->id]);
+        $liked->delete();
+
         $course->delete();
 
         return redirect()->route('course.main');

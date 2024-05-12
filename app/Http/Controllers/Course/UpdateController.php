@@ -22,6 +22,9 @@ class UpdateController extends Controller
             'description' => 'string|max:1200',
             'tags' => '',
             'image' => 'sometimes|file|max:102400',
+            'min_points' => 'nullable|min:1|max:15',
+            'points_four' => 'nullable|min:1|required_with:points_five|max:15',
+            'points_five' => 'nullable|min:1|required_with:points_four|max:15',
 
         ]);
         if (isset($data['tags'])) {

@@ -12,14 +12,39 @@
                 <input type="text" name="title" class="form-control" id="title" value="{{old('title')}}">
                 <br>
                 @error('title')
-                <p class="text-danger">Введите название</p>
+                <p class="text-danger">Введите корректно название</p>
                 @enderror
             </div>
             <div class="col col-sm-5">
                 <label for="description">Описание</label>
                 <textarea name="description" class="form-control" id="description">{{old('description')}}</textarea>
                 @error('description')
-                <p class="text-danger">Введите описание</p>
+                <p class="text-danger">Введите корректно описание</p>
+                @enderror
+
+                <br>
+            </div>
+            <div class="col col-sm-5">
+                <label for="min_points">Минимальное кол-во баллов</label>
+                <input type="text" name="min_points" class="form-control" id="min_points" value="{{old('min_points')}}">
+                @error('min_points')
+                <p class="text-danger">Введите корректно минимальное кол-во баллов</p>
+                @enderror
+                <br>
+            </div>
+            <div class="col col-sm-5">
+                <label for="points_four">Минимальное кол-во баллов на 4</label>
+                <input type="text" name="points_four" class="form-control" id="points_four" value="{{old('points_four')}}">
+                @error('points_four')
+                <p class="text-danger">Введите корректно кол-во баллов</p>
+                @enderror
+                <br>
+            </div>
+            <div class="col col-sm-5">
+                <label for="points_five">Минимальное кол-во баллов на 5</label>
+                <input type="text" name="points_five" class="form-control" id="points_five" value="{{old('points_five')}}">
+                @error('points_five')
+                <p class="text-danger">Введите корректно минимальное кол-во баллов</p>
                 @enderror
                 <br>
             </div>

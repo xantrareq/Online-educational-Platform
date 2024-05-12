@@ -62,16 +62,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="d-flex justify-content-start">
-                    <div class="w-10 p-2">
-                        <input id="searchInputId" class="form-control me-1" type="search" placeholder="Поиск по id"
-                               aria-label="Поиск по id">
-                    </div>
-                    <div class="p-2">
-                        <button class="btn btn-outline-success" type="submit" onclick="redirectToSearch0()">Поиск
-                        </button>
-                    </div>
-                </div>
+
                 <br>
                 <div>
                     <div class="row">
@@ -151,13 +142,7 @@
 </style>
 
 
-<script>
-    function redirectToSearch0() {
-        var searchQuery = document.getElementById('searchInputId').value;
-        var url = "/courses/" + encodeURIComponent(searchQuery);
-        window.location.href = url;
-    }
-</script>
+
 <script>
     function redirectToSearch1() {
         var searchQuery = document.getElementById('searchInput').value;

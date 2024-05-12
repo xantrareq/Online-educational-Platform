@@ -22,7 +22,6 @@ Route::group(['namespace'=>'App\Http\Controllers\Course','middleware' => 'AuthCh
 Route::group(['namespace'=>'App\Http\Controllers\Course','middleware' => 'checkCourseUser'], function () {
     Route::get('/courses/{course}/edit', 'EditController')->name('course.edit');
     Route::get('/courses/{course}/students', 'StudentsController')->name('course.students');
-    Route::get('/courses/{course}/{user}/result_show', 'ResultController')->name('course.student.result');
     Route::patch('/courses/{course}', 'UpdateController')->name('course.update');
     Route::delete('/courses/{course}', 'DestroyController')->name('course.destroy');
 });

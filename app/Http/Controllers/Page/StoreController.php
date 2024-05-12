@@ -19,10 +19,9 @@ class StoreController extends Controller
 
     public function __invoke(Course $course)
     {
+
         $dom = new DOMDocument('1.0', 'UTF-8');
-        libxml_use_internal_errors(true);
-        $dom->loadHTML('<meta http-equiv="Content-Type" content="text/html; charset=utf-8">' . request()->text);
-        libxml_clear_errors();
+        $dom->loadHTML(mb_convert_encoding(request()->text, 'HTML-ENTITIES', 'UTF-8'));
         $request = request();
         $request->validate([
             'name' => 'string|max:255',
@@ -34,11 +33,7 @@ class StoreController extends Controller
         ]);
         $description = $request->text;
 
-
-
         $images = $dom->getElementsByTagName('img');
-
-
         foreach ($images as $key => $img) {
             // Определите максимальный размер изображения в байтах.
             $maxSize = 102400000; // 500KB
@@ -51,7 +46,6 @@ class StoreController extends Controller
                     echo "Изображение слишком большое.";
 
                 }
-
                 $image_name = "/uploads/" . time() . $key . '.png';
                 Storage::disk('public')->put($image_name, $data);
 

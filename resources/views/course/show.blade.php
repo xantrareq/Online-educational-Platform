@@ -28,7 +28,7 @@
                             $courseTeacherId = $course->teacher_id;
                         @endphp
 
-                        @if(($userId === $courseTeacherId and $userId !== null) or Auth::user()->role == 'admin')
+                        @if(($userId === $courseTeacherId and $userId !== null))
 
                             <a class="btn btn-success" href="{{route('course.edit',$course->id)}}" role="button">Изменить
                                 содержание</a>
@@ -72,6 +72,9 @@
                             $sum = 0;
                             $result = 0;
                             $p = $course->pages;
+                            $min_points = $course->min_points;
+
+
                         @endphp
                         @foreach($p as $page)
                             @php
@@ -86,33 +89,41 @@
                                 }
                             @endphp
                         @endforeach
+                        @php
+                            $mark = 2;
+                            if($result >= $min_points)
+                                $mark = 3;
+                            if($result >= $course->points_four)
+                                $mark = 4;
+                            if($result >= $course->points_four)
+                                $mark = 5;
+                        @endphp
                     </form>
                 </div>
-                <a>Добавило в избаранное: {{$course->likes}}</a>
+                <a>Обучаются: {{$course->likes}}</a>
                 @if($vis)
                     <div>
+                        <a>Вы занимаетесь на курсе</a>
                         <a href="{{route('course.unlike',$course)}}">
                             <img src="http://localhost:8000/myassets/green_heart.svg" width="40"
                                  height="40"
                                  alt="like">
                         </a>
-                        <a>Добавлено в избранное</a>
                     </div>
                 @else
                     <div>
+                        <text>Начать заниматься</text>
                         <a href="{{route('course.like',$course)}}">
                             <img src="http://localhost:8000/myassets/blue_heart.svg" width="40"
                                  height="40"
                                  alt="like">
                         </a>
-                        <a>Добавить в избранное</a>
                     </div>
                 @endif
-                <br>
                 <div>
 
                     <h5>Курс "{{$course->title}}"</h5>
-                    <div>id курса: {{$course->id}}</div>
+
                     @php
                         use App\Models\User;
                         $id = $course->teacher_id;
@@ -133,8 +144,18 @@
                             $progress = $result;
                             $result = $result/$sum;
                         @endphp
-                        <div>Выполнено {{ceil($result*100)}}% </div>
-                        <p style="color: green">{{$progress}}  /  {{$sum}}</p>
+                        @if($min_points)
+                            <p style="color: green">Минимальное количество баллов: {{$min_points}} </p>
+                        @endif
+                        @if($course->points_four)
+                            <p style="color: green">Минимальное количество баллов на 4: {{$course->points_four}} </p>
+                            <p style="color: green">Минимальное количество баллов на 5: {{$course->points_five}} </p>
+                            <p style="color: green">Текущая оценка: {{$mark}} </p>
+                        @endif
+
+
+                        {{--                        <div>Выполнено {{ceil($result*100)}}% </div>--}}
+                        <p style="color: green">{{$progress}} / {{$sum}} баллов получено</p>
                         <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25"
                              aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-bar bg-success" style="width: {{$result*100}}%"></div>
@@ -144,7 +165,8 @@
                 <div>
                     @if($userId == $courseTeacherId)
                         <div class="p-1">
-                            <a class="btn btn-outline-success" href="{{route('page.create',$course->id)}}" role="button">Добавить
+                            <a class="btn btn-outline-success" href="{{route('page.create',$course->id)}}"
+                               role="button">Добавить
                                 урок</a>
                         </div>
 
@@ -179,26 +201,20 @@
                                 @endphp
                                 <div class="card">
                                     <div class="flex-fill p-1">
-
                                         <a href="{{route('course_page.show',['course' => $course->id, 'page' => $page->id])}}"><img
                                                     src="http://localhost:8000/myassets/eye.svg" width="60" height="15"
                                                     alt="eye"></a>
                                         <text>Урок: {{$page->name}}</text>
                                         @if($Score!=0)
-                                            <text style="color: green"> Баллы  {{$UsrScore}} / {{$Score}} <br></text>
+                                            <text style="color: green"> Баллы {{$UsrScore}} / {{$Score}} <br></text>
                                         @endif
-
                                     </div>
-
-
                                 </div>
-
                             @endforeach
                         @endif
                     @endif
-
-
                 </div>
+                <br>
             </div>
         </div>
     </div>

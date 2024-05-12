@@ -25,6 +25,32 @@
             @error('description')
             <p class="text-danger">Введите описание</p>
             @enderror
+            <div class="col col-sm-5">
+                <label for="min_points">Минимальное кол-во баллов</label>
+                <input type="text" name="min_points" class="form-control" id="min_points" value="{{$course->min_points}}">
+                @error('min_points')
+                <p class="text-danger">Введите корректно минимальное кол-во баллов</p>
+                @enderror
+
+                <br>
+            </div>
+    </div>
+    <div class="col col-sm-5">
+        <label for="points_four">Минимальное кол-во баллов на 4</label>
+        <input type="text" name="points_four" class="form-control" id="points_four" value="{{$course->points_four}}">
+        @error('points_four')
+        <p class="text-danger">Введите корректно кол-во баллов</p>
+        @enderror
+        <br>
+    </div>
+    <div class="col col-sm-5">
+        <label for="points_five">Минимальное кол-во баллов на 5</label>
+        <input type="text" name="points_five" class="form-control" id="points_five" value="{{$course->points_five}}">
+        @error('points_five')
+        <p class="text-danger">Введите корректно минимальное кол-во баллов</p>
+        @enderror
+        <br>
+    </div>
 {{--            <div class="col col-sm-1">--}}
 {{--                <label for="teacher_id" class="form-label">id учителя</label>--}}
 {{--                <input type="text" name="teacher_id" class="form-control" id="teacher_id"--}}
@@ -34,20 +60,31 @@
 
             <div>
                 <label for="tags">Теги</label>
-                @foreach($tags as $tag)
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{$tag->id}}" id="{{$tag->id}}"
-                               name="tags[]"
-                        @foreach($course->tags as $CourseTag)
-                            {{$tag->id === $CourseTag->id ? 'checked' : ''}}
-                            @endforeach
-                            {{in_array($tag->id, old('tags', [])) ? 'checked' : ''}}
-                        >
-                        <label class="form-check-label" for="{{$tag->id}}">
-                            {{$tag->name}}
-                        </label>
+                <div class="container-fluid">
+                    <div class="row">
+                        @foreach($tags as $index => $tag)
+                            <div class="col-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{$tag->id}}" id="{{$tag->id}}"
+                                           name="tags[]"
+                                    @foreach($course->tags as $CourseTag)
+                                        {{$tag->id === $CourseTag->id ? 'checked' : ''}}
+                                        @endforeach
+                                        {{in_array($tag->id, old('tags', [])) ? 'checked' : ''}}
+                                    >
+                                    <label class="form-check-label" for="tag{{$tag->id}}">
+                                        {{$tag->name}}
+                                    </label>
+                                </div>
+                            </div>
+                            @if (($index + 1) % 6 == 0)
                     </div>
-                @endforeach
+
+                    <div class="row">
+                        @endif
+                        @endforeach
+                    </div>
+                </div>
 
             </div>
             <div>

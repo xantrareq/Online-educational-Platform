@@ -27,13 +27,9 @@ class CheckCourseUser
         $userCourse = CourseUser::where('user_id', $userId)
             ->where('course_id', $courseId)
             ->first();
-
-
         if (!$userCourse) {
             return redirect()->back()->with('error', 'У вас нет доступа к этому курсу.');
         }
-
-
         return $next($request);
     }
 }
