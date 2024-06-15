@@ -15,6 +15,7 @@
 
 
 ## Примеры
-
+Внешний вид урока
 <p align="left"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational_platform/assets/90933432/cde10004-079e-4743-a46c-2084d72d729a" width="700" alt="Libra Logo"></a></p>
-
+Редактор уроков
+<p align="left"><a href="https://laravel.com" target="_blank"><img src="![image](https://github.com/xantrareq/Online-educational_platform/assets/90933432/1bbd7145-18e2-4fbc-9c88-d19a85516ce2)" width="700" alt="Libra Logo"></a></p>
