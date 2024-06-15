@@ -24,7 +24,7 @@
 
 ## Примеры
 Главная страница
-![image](https://github.com/xantrareq/Online-educational-Platform/assets/90933432/cd5b8a21-318d-4726-b4ae-1a6f46d49cc8)
+<p align="left"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational-Platform/assets/90933432/cd5b8a21-318d-4726-b4ae-1a6f46d49cc8" width="700" alt="Libra Logo"></a></p>
 Список курсов
 <p align="left"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational-Platform/assets/90933432/a10930c0-8a69-40cb-8849-8d574113a5ab" width="700" alt="Libra Logo"></a></p>
 Страница курса
