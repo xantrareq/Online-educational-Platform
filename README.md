@@ -29,7 +29,6 @@
 ![image](https://github.com/xantrareq/Online-educational-Platform/assets/90933432/a10930c0-8a69-40cb-8849-8d574113a5ab)
 Страница курса
 ![image](https://github.com/xantrareq/Online-educational-Platform/assets/90933432/77a77891-65a0-49f9-80cc-fe79203505ee)
-
 Страница урока
 <p align="left"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational_platform/assets/90933432/cde10004-079e-4743-a46c-2084d72d729a" width="700" alt="Libra Logo"></a></p>
 Редактор уроков
