@@ -30,6 +30,7 @@
 Страница курса
 <p align="left"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational-Platform/assets/90933432/77a77891-65a0-49f9-80cc-fe79203505ee" width="700" alt="Libra Logo"></a></p>
 Страница урока
+На ней может быть содеражние с форматированием, видео, передаваемое по ссылке, и изображения
 <p align="left"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational_platform/assets/90933432/cde10004-079e-4743-a46c-2084d72d729a" width="700" alt="Libra Logo"></a></p>
 Редактор уроков
 <p align="left"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational_platform/assets/90933432/a0ec49af-b592-4dfd-aef5-38a818221b6c" width="700" alt="Libra Logo"></a></p>
