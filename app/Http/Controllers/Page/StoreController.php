@@ -21,7 +21,9 @@ class StoreController extends Controller
     {
 
         $dom = new DOMDocument('1.0', 'UTF-8');
+        libxml_use_internal_errors(true);
         $dom->loadHTML(mb_convert_encoding(request()->text, 'HTML-ENTITIES', 'UTF-8'));
+        libxml_clear_errors();
         $request = request();
         $request->validate([
             'name' => 'string|max:255',
