@@ -16,6 +16,5 @@
 
 ## Примеры
 
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="![image](https://github.com/xantrareq/Online-educational_platform/assets/90933432/cde10004-079e-4743-a46c-2084d72d729a)
-" width="200" alt="Libra Logo"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational_platform/assets/90933432/cde10004-079e-4743-a46c-2084d72d729a" width="200" alt="Libra Logo"></a></p>
 
