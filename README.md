@@ -26,7 +26,9 @@
 Главная страница
 ![image](https://github.com/xantrareq/Online-educational-Platform/assets/90933432/cd5b8a21-318d-4726-b4ae-1a6f46d49cc8)
 Список курсов
-![image](https://github.com/xantrareq/Online-educational-Platform/assets/90933432/a10930c0-8a69-40cb-8849-8d574113a5ab)
+<p align="left"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational-Platform/assets/90933432/a10930c0-8a69-40cb-8849-8d574113a5ab" width="700" alt="Libra Logo"></a></p>
+
+
 Страница курса
 ![image](https://github.com/xantrareq/Online-educational-Platform/assets/90933432/77a77891-65a0-49f9-80cc-fe79203505ee)
 Страница урока
