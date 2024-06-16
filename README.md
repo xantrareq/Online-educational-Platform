@@ -27,8 +27,12 @@
 <p align="left"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational-Platform/assets/90933432/cd5b8a21-318d-4726-b4ae-1a6f46d49cc8" width="700" alt="Libra Logo"></a></p>
 Список курсов
 <p align="left"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational-Platform/assets/90933432/a10930c0-8a69-40cb-8849-8d574113a5ab" width="700" alt="Libra Logo"></a></p>
+Страница входа
+<p align="left"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational-Platform/assets/90933432/4e25d26f-e193-46a4-8df2-b74909ae864f" width="700" alt="Libra Logo"></a></p>
 Страница курса
 <p align="left"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational-Platform/assets/90933432/77a77891-65a0-49f9-80cc-fe79203505ee" width="700" alt="Libra Logo"></a></p>
+Просмотр результатов учеников курса
+<p align="left"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational-Platform/assets/90933432/5dd6fe8f-5ce7-4ca8-8caa-acea71a7d4f6" width="700" alt="Libra Logo"></a></p>
 Страница урока
 На ней может быть содеражние с форматированием, видео, передаваемое по ссылке, и изображения
 <p align="left"><a href="https://laravel.com" target="_blank"><img src="https://github.com/xantrareq/Online-educational_platform/assets/90933432/cde10004-079e-4743-a46c-2084d72d729a" width="700" alt="Libra Logo"></a></p>
